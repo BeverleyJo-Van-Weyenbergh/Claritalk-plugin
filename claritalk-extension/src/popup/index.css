@@ -1,0 +1,53 @@
+body {
+  width: 22rem;
+  padding: 24px;
+  background: #ffffff;
+  font-family: 'Syne', sans-serif;
+  color: #30163A;
+  margin: 0;
+}
+
+h2 {
+  font-family: 'Funnel Display', sans-serif;
+  font-size: 18px;
+  color: #30163A;
+  margin: 0 0 8px 0;
+}
+
+p {
+  font-size: 13px;
+  color: #30163A;
+  opacity: 0.7;
+  margin: 0 0 20px 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  flex: 1;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #682577;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+#yes:hover { background: #521b66; }
+
+#no {
+  background: #FDE594;
+  color: #30163A;
+  transition: all 0.3s ease;
+}
+
+#no:hover { background: #d9bd6c; }
