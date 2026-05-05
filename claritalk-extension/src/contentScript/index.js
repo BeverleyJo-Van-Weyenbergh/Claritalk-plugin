@@ -18,6 +18,8 @@ function checkAndShowPopup() {
       }),
     )
 
+    const claritalkUrlNoConnect = `https://app.claritalk.com/create-conversation?company_id=${companyId}&firm_id=${firmId}&locale=nl`
+
     const claritalkUrl = `claritalkconnect://meeting/new?name=Meeting: ${new Date().toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit', year: 'numeric' })}&locale=nl&payload=${payload}`
     console.log(claritalkUrl)
 
@@ -96,11 +98,28 @@ function checkAndShowPopup() {
     document.body.appendChild(card)
 
     document.getElementById('claritalk-yes').addEventListener('click', () => {
-      try {
-        window.location.assign(claritalkUrl)
-      } catch (e) {
-        console.error('Failed to open Claritalk:', e)
-      }
+      const iframe = document.createElement('iframe')
+      iframe.style.display = 'none'
+      document.body.appendChild(iframe)
+
+      let appOpened = false
+
+      window.addEventListener(
+        'blur',
+        () => {
+          appOpened = true
+        },
+        { once: true },
+      )
+
+      iframe.src = claritalkUrl
+
+      setTimeout(() => {
+        if (!appOpened) {
+          window.open(claritalkUrlNoConnect, '_blank')
+        }
+        iframe.remove()
+      }, 1500)
 
       card.remove()
     })
