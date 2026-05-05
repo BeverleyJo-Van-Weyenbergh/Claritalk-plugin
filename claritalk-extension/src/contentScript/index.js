@@ -7,7 +7,19 @@ function checkAndShowPopup() {
     const firmId = parts[2]
     const companyId = parts[3]
 
-    const claritalkUrl = `https://app.claritalk.com/create-conversation?company_id=${companyId}&firm_id=${firmId}&locale=nl`
+    const payload = btoa(
+      JSON.stringify({
+        external_relations: {
+          silverfin: {
+            external_identifier: companyId,
+            external_identifier_type: 'company',
+          },
+        },
+      }),
+    )
+
+    const claritalkUrl = `claritalkconnect://meeting/new?name=Meeting: ${new Date().toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit', year: 'numeric' })}&locale=nl&payload=${payload}`
+    console.log(claritalkUrl)
 
     const card = document.createElement('div')
     card.innerHTML = `
@@ -84,7 +96,12 @@ function checkAndShowPopup() {
     document.body.appendChild(card)
 
     document.getElementById('claritalk-yes').addEventListener('click', () => {
-      window.open(claritalkUrl, '_blank')
+      try {
+        window.location.assign(claritalkUrl)
+      } catch (e) {
+        console.error('Failed to open Claritalk:', e)
+      }
+
       card.remove()
     })
 
