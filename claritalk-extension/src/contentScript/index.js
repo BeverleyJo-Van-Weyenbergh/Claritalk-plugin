@@ -27,8 +27,8 @@ function checkAndShowPopup() {
         <h2>Meeting starten in Claritalk?</h2>
         <p>Koppel dit Silverfin dossier aan een nieuw gesprek in Claritalk.</p>
         <div id="claritalk-buttons">
-          <button id="claritalk-yes">Ja, start een meeting</button>
           <button id="claritalk-no">Nee</button>
+          <button id="claritalk-yes">Ja, start een meeting</button>
         </div>
       </div>
     `
